@@ -11,7 +11,7 @@ def verify(hospitalMatches, hospitalsPref, applicantsPref):
     #part a: validity 
     #check that there is no loners 
     if None in hospitalMatches:
-        return "Invalid (something is unmatched)"
+        return "INVALID (something is unmatched)"
     #create an empty set for applicants and hospitals to track matches
     matchedApplicants=set()
     matchedHospitals=set()
@@ -23,7 +23,7 @@ def verify(hospitalMatches, hospitalsPref, applicantsPref):
     for h in range(num):
         applicant=hospitalMatches[h]
         if applicant in matchedApplicants:
-            return "Invalid (applicant matched multiple times)"
+            return "INVALID (applicant matched multiple times)"
         matchedApplicants.add(applicant)
     #for each a in applicants, check which hospital its matched too
         #if that hospital is already in the set (already macthed elsewhere) 
@@ -33,7 +33,7 @@ def verify(hospitalMatches, hospitalsPref, applicantsPref):
     for a in range(num):
         hospital=hospitalMatches.index(a)
         if hospital in matchedHospitals:
-            return "Invalid (hospital matched multiple times)"
+            return "INVALID (hospital matched multiple times)"
         matchedHospitals.add(hospital)
     #part b: stability (nested for loop?) 
         #for h in hospitals
@@ -48,6 +48,6 @@ def verify(hospitalMatches, hospitalsPref, applicantsPref):
             currHosp=hospitalMatches.index(a)
             if (hospitalsPref[h].index(a) < hospitalsPref[h].index(currApp)):
                 if (applicantsPref[a].index(h) < applicantsPref[a].index(currHosp)):
-                    return "Invalid (unstable match found)"
+                    return "UNSTABLE (unstable match found)"
     #return true (stable & valid)
-    return "Verified (stable and valid)"
+    return "VALID STABLE"
