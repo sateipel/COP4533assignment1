@@ -52,13 +52,14 @@ def stable_match(hosp_rank, stud_rank):
     # return final hospital -> student matching
     return hosp_to_student
 
-
+#verifier
 def check_matching(assignments, hosp_rank, stud_rank):
     size = len(assignments)
 
     if None in assignments:
         return "Invalid"
 
+#checks that no student is matched more than once
     seen = set()
     for hosp in range(size):
         stud = assignments[hosp]
@@ -66,6 +67,7 @@ def check_matching(assignments, hosp_rank, stud_rank):
             return "Invalid"
         seen.add(stud)
 
+#checks for blocking pairs
     for hosp in range(size):
         current_student = assignments[hosp]
         for stud in range(size):
@@ -78,6 +80,7 @@ def check_matching(assignments, hosp_rank, stud_rank):
     return "Valid stable"
 
 
+#scalability experiment
 sizes = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
 
 
@@ -89,6 +92,7 @@ print("-" * 40)
 
 matching_times, verifier_times = [], []
 
+#run experiment for each problem size
 for n in sizes:
     total_matching_time = 0.0
     total_verifier_time = 0.0
@@ -96,14 +100,16 @@ for n in sizes:
     for _ in range(TRIALS):
         hospitals, students = make_preferences(n)
 
+        #Gale-Shapley
         start_time = time.perf_counter()
         matches = stable_match(hospitals, students)
         total_matching_time += time.perf_counter() - start_time
 
+        #verifier
         start_time = time.perf_counter()
         check_matching(matches, hospitals, students)
         total_verifier_time += time.perf_counter() - start_time
-
+    #computing the averages
     avg_matching_time = total_matching_time / TRIALS
     avg_verifier_time = total_verifier_time / TRIALS
 
@@ -113,8 +119,8 @@ for n in sizes:
     print(f"{n:<10} {avg_matching_time:.6f}s      {avg_verifier_time:.6f}s")
 
 print("-" * 40)
-print("Done!")
 
+#plot results
 plt.plot(sizes, matching_times, marker='o', label='Matching Engine')
 plt.plot(sizes, verifier_times, marker='s', label='Verifier')
 plt.xlabel('Number of Hospitals/Students (n)')
@@ -124,7 +130,7 @@ plt.legend()
 plt.grid(True, alpha=0.3)
 plt.savefig('scalability.png', dpi=300, bbox_inches='tight')
 print("\nGraph saved as 'scalability.png'")
-
+#observations
 print("\nObservations:")
 print("- Both algorithms show ~O(n^2) growth")
 print("- Doubling n tends to increase time by ~4x")
