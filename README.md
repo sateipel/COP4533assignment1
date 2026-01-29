@@ -73,3 +73,13 @@ Tips:
 
 Make sure you keep your repository structure clean and organized. i.e.,  Use a clean layout (e.g., src/, data/, tests/). Meaningful filenames; do not submit an unstructured dump of files
 A grader must be able to git clone the repository and follow the README to compile (if needed) and run your programs without additional steps.
+
+Katie Boetig Notes
+How to Run:
+from the project root, type
+python src/main.py
+This runs Task C, pritns the timing table, saves the graph, prompts the user for n, runs Gale-Shaply, and prints the matching, verification result, and the proposal count.
+
+Task C scalability requirements: As n increases, the matching engine and verifier show approximately
+quadratic growth. When n doubles, the running time increases by four times, consistent with n^2 behavior. 
+Large n is slower because it checks all hospital-student pairs. 
