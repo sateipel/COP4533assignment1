@@ -13,6 +13,7 @@ def gale_shapley(hospitalsPref, applicantsPref):
     hospitalMatches=[None]*num
     applicantMatches=[None]*num
     nextProposal = [0] * num
+    count=0
 #while (some hospital = free and hasnt been matched/assigned to every applicant):
     while freeHospitals:
         #choose some hospital h
@@ -38,5 +39,5 @@ def gale_shapley(hospitalsPref, applicantsPref):
         #a rejects h
         else: 
             freeHospitals.append(h)
-    return hospitalMatches
-#could tentatively return number of proposals too by adding counter 
+        count+=1
+    return hospitalMatches, count
