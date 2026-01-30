@@ -1,6 +1,6 @@
 from match import gale_shapley
 from verify import verify
-from scale import make_preferences
+#from scale import make_preferences
 
 #read inputs
 def fileIn(input):
@@ -21,11 +21,11 @@ def fileIn(input):
     studentPrefs=[]
     #for loop that will append a list of prefenreces (a line of input) into the list 
     for i in range(1, n+1):
-        prefs=list(map(int, lines[i].split()))
+        prefs=[int(x)-1 for x in lines[i].split()]
         hospitalPrefs.append(prefs)
     #repeat for loop for students (starts at n+1 lines down)
     for j in range(n+1, (n*2)+1):
-        prefs=list(map(int, lines[j].split()))
+        prefs=[int(x)-1 for x in lines[j].split()]
         studentPrefs.append(prefs)
     return hospitalPrefs, studentPrefs, n
 
@@ -36,6 +36,17 @@ def fileIn(input):
         #write 
 
 #change this in order to be able to read a file OR input from user
+def main():
+    hospitalsPref, applicantsPref, n = fileIn("samples/example.in")
+    matches, proposals = gale_shapley(hospitalsPref, applicantsPref)
+    result = verify(matches, hospitalsPref, applicantsPref)
+    for h,s in enumerate(matches):
+        print(f"{h+1} {s+1}")
+    print(result)
+
+if __name__ == "__main__":
+    main()
+"""
 def main():
     #FORM: python main.py *inputFile.in* *outputFile.out*
     #if sys.arg=3: file input mode 
@@ -56,6 +67,5 @@ def main():
 
     print("\nVerification:", result)
     print("Total proposals:", proposals)
+"""
 
-if __name__ == "__main__":
-    main()
