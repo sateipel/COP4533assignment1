@@ -1,6 +1,7 @@
 from match import gale_shapley
 from verify import verify
 #from scale import make_preferences
+import os
 
 #read inputs
 def fileIn(input):
@@ -31,9 +32,16 @@ def fileIn(input):
 
 
 #write outputs
+def fileOut(input, hospitalMatches):
     #open/create the output file to write to
+    filename, type=os.path.splitext(input)
+    output=filename+ ".out"
     #for the hospital/students matches, enumerate the results 
-        #write 
+    #write 
+    with open (output, "w") as file:
+        for h,s in enumerate(hospitalMatches):
+            file.write(f"{h+1} {s+1}\n")
+
 
 #change this in order to be able to read a file OR input from user
 def main():
@@ -43,6 +51,7 @@ def main():
     for h,s in enumerate(matches):
         print(f"{h+1} {s+1}")
     print(result)
+    fileOut("samples/example.in", matches)
 
 if __name__ == "__main__":
     main()
