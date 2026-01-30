@@ -8,6 +8,7 @@ HOW TO RUN:
 IF using .in files:
 2) from the project root, type : "python src/main.py samples/*name*.in" *where name is the file you would like to run
 3) Code will run and print the output, and also write the output to a correponding *name*.out file 
+
 IF using user prompts
 2) from the project root, type : "python src/main.py"
 3) This will prompt the user for n, before printing results
