@@ -57,8 +57,9 @@ def main():
         #print the results
         for h,s in enumerate(matches):
             print(f"{h+1} {s+1}")
-        print(result)
         fileOut(input_file, matches)
+        print("\nVerification:", result)
+        print("Total proposals:", proposals)
     #else: input from user mode
     else: 
         n = int(input("Enter number of hospitals/students: "))
