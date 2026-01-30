@@ -1,6 +1,7 @@
+import sys
 from match import gale_shapley
 from verify import verify
-#from scale import make_preferences
+from scale import make_preferences
 import os
 
 #read inputs
@@ -34,7 +35,7 @@ def fileIn(input):
 #write outputs
 def fileOut(input, hospitalMatches):
     #open/create the output file to write to
-    filename, type=os.path.splitext(input)
+    filename, extention=os.path.splitext(input)
     output=filename+ ".out"
     #for the hospital/students matches, enumerate the results 
     #write 
@@ -42,39 +43,35 @@ def fileOut(input, hospitalMatches):
         for h,s in enumerate(hospitalMatches):
             file.write(f"{h+1} {s+1}\n")
 
-
-#change this in order to be able to read a file OR input from user
 def main():
-    hospitalsPref, applicantsPref, n = fileIn("samples/example.in")
-    matches, proposals = gale_shapley(hospitalsPref, applicantsPref)
-    result = verify(matches, hospitalsPref, applicantsPref)
-    for h,s in enumerate(matches):
-        print(f"{h+1} {s+1}")
-    print(result)
-    fileOut("samples/example.in", matches)
-
-if __name__ == "__main__":
-    main()
-"""
-def main():
-    #FORM: python main.py *inputFile.in* *outputFile.out*
-    #if sys.arg=3: file input mode 
+    #FORM: python3 main.py *inputFile.in* 
+    #if sys arg=2: file input mode 
+    if len(sys.argv) == 2:
         #make variables from file inputs (sys.arg)
+        input_file = sys.argv[1]
+        hospitalsPref, applicantsPref, n = fileIn(input_file)
         #based on those inputds, call the functions
+        matches, proposals = gale_shapley(hospitalsPref, applicantsPref)
+        result = verify(matches, hospitalsPref, applicantsPref)
         #write to output file 
         #print the results
-    #else: input from user mode 
-    n = int(input("Enter number of hospitals/students: "))
-    hospitals, students = make_preferences(n)
+        for h,s in enumerate(matches):
+            print(f"{h+1} {s+1}")
+        print(result)
+        fileOut(input_file, matches)
+    #else: input from user mode
+    else: 
+        n = int(input("Enter number of hospitals/students: "))
+        hospitals, students = make_preferences(n)
 
-    matches, proposals = gale_shapley(hospitals, students)
-    result = verify(matches, hospitals, students)
+        matches, proposals = gale_shapley(hospitals, students)
+        result = verify(matches, hospitals, students)
 
-    print("\nMatching (Hospital -> Student):")
-    for h, s in enumerate(matches):
-        print(f"H{h} -> S{s}")
+        print("\nMatching (Hospital -> Student):")
+        for h, s in enumerate(matches):
+            print(f"{h+1} {s+1}")
 
-    print("\nVerification:", result)
-    print("Total proposals:", proposals)
-"""
-
+        print("\nVerification:", result)
+        print("Total proposals:", proposals)
+if __name__ == "__main__":
+    main()
