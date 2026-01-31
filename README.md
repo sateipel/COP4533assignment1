@@ -1,4 +1,26 @@
 # COP4533assignment1
+
+Stephanie Teipel (UFID: 69604935)
+Katherine Boetig (UFID:_________)
+
+HOW TO RUN:
+1) copy the repo to your local device
+IF using .in files:
+2) from the project root, type : "python src/main.py samples/*name*.in" *where name is the file you would like to run
+3) Code will run and print the output, and also write the output to a correponding *name*.out file 
+
+IF using user prompts
+2) from the project root, type : "python src/main.py"
+3) This will prompt the user for n, before printing results
+
+Task C will run for either of these methods: printing the timing table, saving the graph, running Gale-Shaply, and printing the matching, verification result, and the proposal count.
+
+Task C scalability requirements: As n increases, the matching engine and verifier show approximately
+quadratic growth. When n doubles, the running time increases by four times, consistent with n^2 behavior. 
+Large n is slower because it checks all hospital-student pairs. 
+
+
+ASSIGNMENT DETAILS:
 Programming Assignment 1: Matching and Verifying
 Due date: Jan 30, 2026 at 11:59PM.
 
