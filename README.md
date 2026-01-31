@@ -75,6 +75,7 @@ Make sure you keep your repository structure clean and organized. i.e.,  Use a c
 A grader must be able to git clone the repository and follow the README to compile (if needed) and run your programs without additional steps.
 
 Katie Boetig Notes
+UFID: 52055316
 How to Run:
 from the project root, type
 python src/main.py
